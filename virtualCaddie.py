@@ -4,6 +4,12 @@ userDict = {
 2: "pro"
 }
 
+userLie = {
+0: "Fairway",
+1: "Rough",
+2: "Sand"
+}
+
 clubDict = {
 0: "Driver",
 1: "3 wood",
@@ -56,10 +62,29 @@ distDict = {
 }}
 
 print( "****** WELCOME TO VIRTUAL CADDY! ******")
-print("I will help you choose the right club based on how far you are from the pin (yards)")
-userLevel = int(input("What is your skill level? Select 0: Beginner, 1: Average, 2: Pro : " ))
+print("I will help you choose the appropriate club based on how far you are from the pin (yards)")
+userLevel = int(input("What is your skill level? Select 0: Beginner, 1: Average, 2: Pro = " ))
 userRange = int(input("How far are you from the pin in yards? "))
+userLie = input("What is your lie? Select 0: Fairway, 1: Rough, 2: Sand, 3: Other = ")
+
+lie_options = [("1", "club up"), ("2", "use a sandwedge if near the green, otherwise use the club below"), ("3", "Punch out and get it back on the fairway the best you can")]
+
+for option in lie_options:
+    if userLie == option[0]:
+        print("Recommendation:", option[1])
+        if option[0] == "1":
+            userRange += 15
+            print("Distance adjustment: +15 yards")
+        break
+
+"""if userLie == "1":
+    userRange += 15
+    print("I suggest clubbing up based on your lie.")
+elif userLie == "2":
+    print("If your near the green, I would use a sandwedge, if not use the club below!")
+elif userLie == "3":
+    print("I would suggest get it back on the fairway the best you can!")"""
 
 for key, value in distDict[userLevel].items():
     if userRange >= key[0] and userRange <= key[1]:
-        print("The club that you should be using is " , clubDict[value])
+        print("The club that you should be using is ", clubDict[value])
